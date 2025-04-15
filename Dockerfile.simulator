@@ -1,0 +1,10 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir requests
+
+COPY ./simulator /app/
+
+CMD ["python", "workload_simulator.py", "--url", "http://api:8000", "--rate", "10", "--duration", "3600"]
